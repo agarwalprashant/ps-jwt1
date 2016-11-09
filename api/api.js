@@ -24,8 +24,18 @@ app.post("/register",function(req,res){
 		password:user.password
 	})
 
+	var payload = {
+		iss:req.hostname,
+		sub:user._id
+	}
+
+	var token = jwt.encode(payload,"shh...");
+
 	newUser.save(function(error){
-		res.status(200).send(newUser.toJSON());
+		res.status(200).send({
+			user: newUser.toJSON(),
+			token:token
+		});
 	})
 })
 
@@ -36,8 +46,7 @@ db.once('open',function(){
 	console.log("we are connected");
 })
 
-// var server = app.listen(3000,function(){
-// 	console.log("api listening on ",server.address().port);
-// });
+var server = app.listen(3000,function(){
+	console.log("api listening on ",server.address().port);
+});
 
-console.log(jwt.encode("hi",'secret'));
