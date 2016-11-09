@@ -28,11 +28,19 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
+
+//define a schema(this is schema definition)
 var UserSchema = new mongoose.Schema({
 	email: String,
 	password: String
 });
 
+UserSchema.methods.toJSON = function(){
+	var user = this.toObject();
+	delete user.password;
+	console.log(user);
+	return user;
+}
 
 
 
