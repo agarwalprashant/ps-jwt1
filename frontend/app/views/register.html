@@ -7,5 +7,6 @@
     <input name="password_confirm" ng-model="password_confirm" type="password" class="form-control" placeholder="Confirm Password" validate-equals='password'>
     <p class="help-block" ng-show="register.password_confirm.$dirty && register.password_confirm.$invalid">please match the passwords.</p>
     <button ng-disabled="register.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <button ng-click="google()" class="btn btn-lg btn-primary btn-block" type="button">Sign in With Google</button>
 </form>
 

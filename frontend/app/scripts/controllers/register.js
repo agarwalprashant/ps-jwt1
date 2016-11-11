@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('psJwt1App')
-  .controller('RegisterCtrl', function ($scope,$http) {
+  .controller('RegisterCtrl', function ($scope,$http,authToken,auth) {
   	
 
   	$scope.submit = function(){
@@ -11,13 +11,18 @@ angular.module('psJwt1App')
         email:$scope.email,
         password:$scope.password
       };
-      
+
   		$http.post(url,user)
-  			.success(function(data){
-  				console.log(data);	
+  			.success(function(res){
+          console.log(res);
+  				authToken.setToken(res.token);	
   			})
   			.error(function(error){
   				console.log("bad");
   			})
-  	}
+  	};
+
+    $scope.google = function(){
+      auth.googleAuth().then();
+    }
   });
